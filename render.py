@@ -1,4 +1,4 @@
-import pygame, movement
+import pygame, raycaster
 
 def map(canvas, cell_size, map):
     for yt in range(len(map)):
@@ -8,4 +8,4 @@ def map(canvas, cell_size, map):
 
 def player(canvas, player):
     pygame.draw.rect(canvas, (0, 255, 0), pygame.Rect(player['x'], player['y'], player['size'], player['size']))
-    pygame.draw.line(canvas, (255, 255, 0), (player['x'] + player['size'] / 2, player['y'] + player['size'] / 2), (player['x'] + player['size'] / 2 + movement.move_angle(player['angle'], 10)[0], player['y'] + player['size'] / 2 + movement.move_angle(player['angle'], 10)[1]), 1)
+    pygame.draw.line(canvas, (255, 255, 0), (player['x'] + player['size'] / 2, player['y'] + player['size'] / 2), (player['x'] + player['size'] / 2 + raycaster.move_angle(player['angle'], 10)[0], player['y'] + player['size'] / 2 + raycaster.move_angle(player['angle'], 10)[1]), 1)

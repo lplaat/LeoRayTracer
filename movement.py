@@ -1,9 +1,6 @@
-import pygame, math, collision
+import pygame, collision, raycaster
 
 inner_keys = [False, False, False, False]
-
-def move_angle(angle, amount):
-    return (math.cos(angle) * amount, math.sin(angle) * amount)
 
 def key(keys, key_id):
     if keys[key_id] == False:
@@ -35,8 +32,8 @@ def update_keys(event, keys):
             keys = key(keys, 3)
 
 def update(player, cell_size, map):
-    player = TryMove(player, cell_size, map, move_angle(player['angle'], player['speed'])[0], 0)
-    player = TryMove(player, cell_size, map, 0, move_angle(player['angle'], player['speed'])[1])
+    player = TryMove(player, cell_size, map, raycaster.move_angle(player['angle'], player['speed'])[0], 0)
+    player = TryMove(player, cell_size, map, 0, raycaster.move_angle(player['angle'], player['speed'])[1])
 
     if inner_keys[0]:
         player['speed'] = 2

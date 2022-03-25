@@ -1,5 +1,8 @@
 import pygame, math, collision
 
+def move_angle(angle, amount):
+    return (math.cos(angle) * amount, math.sin(angle) * amount)
+
 def RayCaster(canvas, player, cell_size, map):
     x = 0
     ray_angle = player['angle'] - (player['fov'] / 100) / 2
