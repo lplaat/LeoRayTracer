@@ -1,8 +1,10 @@
 import pygame, math, collision
 
+#calculate angle
 def move_angle(angle, amount):
     return (math.cos(angle) * amount, math.sin(angle) * amount)
 
+#spawns rays to see the distance off a object
 def RayCaster(canvas, player, cell_size, map):
     x = 0
     ray_angle = player['angle'] - (player['fov'] / 100) / 2
@@ -26,6 +28,7 @@ def RayCaster(canvas, player, cell_size, map):
         x += player['res']
         ray_angle += (player['fov'] / scan_lines) / 100
 
+#calculate distance off how far the wall is with angle
 def Ray(angle, player, cell_size, map):
     found = True
     rx = player['x'] + player['size'] / 2

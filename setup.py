@@ -1,5 +1,6 @@
 import pygame
 
+#setting up for the game
 def start():
     pygame.init()
     pygame.display.set_caption("RayCaster")

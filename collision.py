@@ -1,5 +1,6 @@
 import math
 
+#checks when object is in side a wall
 def TouchingWall(object, cell_size, map, dist_from_wall = False):
     touching = False
     closed_wall = math.inf

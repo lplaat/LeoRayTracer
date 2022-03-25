@@ -1,7 +1,9 @@
 import pygame, collision, raycaster
 
+#key list
 inner_keys = [False, False, False, False]
 
+#set key list to True or False
 def key(keys, key_id):
     if keys[key_id] == False:
         keys[key_id] = True
@@ -11,6 +13,7 @@ def key(keys, key_id):
         inner_keys[key_id] = False
     return keys
 
+#tries to move player
 def TryMove(player, cell_size, map, dx, dy):
     player['x'] += dx
     player['y'] += dy
@@ -20,6 +23,7 @@ def TryMove(player, cell_size, map, dx, dy):
 
     return player
 
+#update key list when button is pressed
 def update_keys(event, keys):
     if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
         if event.key == pygame.K_UP:
@@ -31,6 +35,7 @@ def update_keys(event, keys):
         elif event.key == pygame.K_DOWN:
             keys = key(keys, 3)
 
+#update player movement
 def update(player, cell_size, map):
     player = TryMove(player, cell_size, map, raycaster.move_angle(player['angle'], player['speed'])[0], 0)
     player = TryMove(player, cell_size, map, 0, raycaster.move_angle(player['angle'], player['speed'])[1])
