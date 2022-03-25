@@ -17,6 +17,7 @@ map = [
 
 keys = [False, False, False, False]
 cell_size = 64
+
 player = {
     'res': 16,
     'fov': 60,
@@ -26,6 +27,7 @@ player = {
     'size': 10,
     'speed': 0
 }
+
 
 def move_angle(angle, amount):
     return [math.cos(angle) * amount, math.sin(angle) * amount]
@@ -44,7 +46,7 @@ def TouchingWall(object, dist_from_wall = False):
             dist = math.hypot(object['x'] - xt * cell_size, object['y'] - yt * cell_size)
             if dist < cell_size * 2:
                 if dist_from_wall:
-                    if closed_wall > dist and dist < cell_size * 1.5:
+                    if closed_wall > dist and dist < cell_size / 4:
                         closed_wall = dist
 
                 if map[yt][xt] == 1 and object['x'] > xt*cell_size and object['x'] < xt*cell_size + cell_size:
@@ -86,7 +88,7 @@ def RayCaster():
         elif color < 0:
             color = 0
 
-        pygame.draw.rect(canvas, (0, 0, color), pygame.Rect(448 + x, 250-height, player['res'], height*2))
+        pygame.draw.rect(canvas, (0, 0, color), pygame.Rect(448 + x, 224-height, player['res'], height*2))
 
         x += player['res']
         ray_angle += (player['fov'] / scan_lines) / 100
@@ -100,9 +102,9 @@ def Ray(angle):
     dist = 0
     while found:
         if dist_from_wall == math.inf:
-            steps = 5
+            steps = 10
         else:
-            steps = 2.5
+            steps = 1
 
         rx += math.cos(angle) * steps
         ry += math.sin(angle) * steps
@@ -174,6 +176,9 @@ while not exit:
     pygame.draw.line(canvas, (255, 255, 0), (player['x'] + player['size'] / 2, player['y'] + player['size'] / 2), (player['x'] + player['size'] / 2 + move_angle(player['angle'], 10)[0], player['y'] + player['size'] / 2 + move_angle(player['angle'], 10)[1]), 1)
 
     RayCaster()
+
+    print(clock.get_fps())
+    # print(player)
 
     pygame.display.update()
     clock.tick(30)
